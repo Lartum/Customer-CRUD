@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState } from 'react'
 import { customerData } from '../utils/dataParsing'
 
 const CustomerCard = ({ 
@@ -17,34 +17,38 @@ const CustomerCard = ({
     productNumber, 
     quantity
     }    
-
     function reducer(state, action){
         switch(action.type){
             case 'CUSTOMER_NAME':
-                return{  customer_name: action.payload }
+                return{ ...state, customer_name: action.payload }
             case 'CUSTOMER_EMAIL':
-                return{  customer_email: action.payload }    
+                return{ ...state, customer_email: action.payload }    
             case 'PRODUCT_NUMBER':
-                return{  productNumber: action.payload }    
+                return{ ...state, productNumber: action.payload }    
             case 'QUANTITY':
-                return{  quantity: action.payload }  
+                return{ ...state, quantity: action.payload }  
              default:
-                return{ state } 
+                return{ ...state } 
         }
 
     }
 
-
     const [ disableEdit, setDisableEdit ] = useState(true)  
     const [ state, dispatch ] = useReducer(reducer, initialState)
-
-    const handleSubmit = () =>{
+    
+    const handleSubmit = () => {
         setDisableEdit(true)
-     
-        // const modifiedCustomer = customerData.find(customer => customer.id === id)
-      
+        customerData.filter(customer => customer.id !== state.id)
+        customerData.unshift({
+           id: state.id,
+           customer_name: state.customer_name,    
+           customer_email: state.customer_email,
+           product: 'Product ' + state.product,
+           quantity: state.quantity
+        })
+        localStorage.setItem('customerData', JSON.stringify(customerData))
     }
-
+  
     return (
         <div className='customerCard'>
             <li key={id}>

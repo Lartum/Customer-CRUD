@@ -18,7 +18,8 @@ const NewOrderForm = () =>{
            quantity: quantity
        })
     localStorage.setItem('customerData', JSON.stringify(customerData))
-    alert('new Order Created check')
+    console.log(JSON.stringify(customerData))
+    alert('check the console for latest updated value')
     }
     return(
         <div className='newOrder'>

@@ -3,8 +3,7 @@ import  { BrowserRouter as Router, Route } from 'react-router-dom'
 import PrivateRoute from './component/PrivateRoute'
 import Home from './component/Home'
 import Dashboard from './component/Dashboard'
-import NewOrderForm from './component/NewOrderForm';
-
+import NewOrderForm from './component/NewOrderForm'
 
 function App() {
   return (
